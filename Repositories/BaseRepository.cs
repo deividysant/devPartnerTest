@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using devPartnerTest.Data;
-using devPartnerTest.Entities;
+using devPartnerTest.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -9,7 +9,7 @@ namespace devPartnerTest.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        public readonly devPartnerContext _context;
+        private readonly devPartnerContext _context;
 
         public BaseRepository(devPartnerContext context)
         {
@@ -34,6 +34,10 @@ namespace devPartnerTest.Repositories
 
         public bool Update(T entity)
         {
+            var verify = GetById(entity.Id);
+
+            if(verify is null) return false;
+
             _context.Set<T>().Update(entity);
             return _context.SaveChanges() == 1;
         }
@@ -41,6 +45,8 @@ namespace devPartnerTest.Repositories
         public bool Delete(int id)
         {
             var entity = GetById(id);
+            if(entity is null) return false;
+            
             _context.Set<T>().Remove(entity);
             return _context.SaveChanges() == 1;
         }

@@ -1,14 +1,13 @@
-using devPartnerTest.Entities;
+using devPartnerTest.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace devPartnerTest.Data
 {
     public class devPartnerContext : DbContext
     {
-        protected devPartnerContext(DbContextOptions options) : base(options)
-        {
-        }
+        public devPartnerContext(DbContextOptions<devPartnerContext> options) : base(options)
+        {}
 
-        public DbSet<NotaFiscal> MyProperty { get; set; }
+        public DbSet<NotaFiscal> NotaFiscais { get; set; }
     }
 }

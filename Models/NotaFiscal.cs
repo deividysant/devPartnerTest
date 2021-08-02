@@ -1,10 +1,9 @@
 using System;
 
-namespace devPartnerTest.Entities.ViewModel
+namespace devPartnerTest.Models
 {
-    public class NotaFiscalViewModel
+    public class NotaFiscal : BaseEntity
     {
-        public int notaFiscalId { get; set; }
         public int numeroNf { get; set; }
         public double valorTotal { get; set; }
         public DateTime dataNf { get; set; }
